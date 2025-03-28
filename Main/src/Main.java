@@ -5,9 +5,12 @@ public class Main {
     public static void main(String[] args) {
 Character c1 = new Character();
 System.out.println(c1);
+Barbarian b1 = new Barbarian("Fart", 2);
 
-Barbarian b1 = new Barbarian("Fart", 1);
-System.out.println(b1);
+Cleric cl1 = new Cleric("Summer", 2);
+System.out.println(cl1);
+cl1.levelUp();
+System.out.println(cl1);
     }
 }
 
@@ -24,27 +27,20 @@ class Character {
     protected int charisma;
     protected ArrayList<String> feats = new ArrayList<>();
 
-    public Character(){
-        this("Player",1);
-    }
 
-    public Character (String name, int level, int hit_points, int armor, int strength, int dexterity, int constitution, int intelligence, int wisdom, int charisma, ArrayList feats){
-        this.name = name;
-        this.level = level;
-        this.hit_points = hit_points;
-        this.armor = armor;
-        this.strength = strength;
-        this.dexterity = dexterity;
-        this.constitution = constitution;
-        this.intelligence = intelligence;
-        this.wisdom = wisdom;
-        this.charisma = charisma;
+    //The default constructor
+    public Character(){
+        this.name= "Player";
+        this.level = 1;
+        this.strength = 10;
+        this.dexterity = 10;
+        this.constitution = 10;
+        this.intelligence = 10;
+        this.wisdom = 10;
+        this.charisma = 10;
         this.feats = feats;
         calculateHitPoints();
         calculateArmorClass();
-    }
-
-    public Character(String name, int level) {
     }
 
     private int dice() {
@@ -60,6 +56,21 @@ class Character {
             }
         }
         return sum - lowest;
+    }
+
+    //Constructor for the classes
+    public Character (String name, int level){
+        this.name = name;
+        this.level = level;
+        this.strength = dice();
+        this.dexterity = dice();
+        this.constitution = dice();
+        this.intelligence = dice();
+        this.wisdom = dice();
+        this.charisma = dice();
+        this.feats = feats;
+        calculateHitPoints();
+        calculateArmorClass();
     }
 
     private int getAbilityModifier (int score) {
@@ -97,8 +108,120 @@ class Barbarian extends Character{
     public Barbarian (String name, int level) {
         super(name, level);
         this.strength += 2;
-        this.constitution += 2;
+        this.constitution += 1;
         addFeat("Rage");
         addFeat("Unarmored Defense");
     }
 }
+
+class Bard extends Character{
+    public Bard (String name, int level) {
+        super(name, level);
+        this.charisma += 2;
+        this.dexterity += 1;
+        addFeat("Inspiration");
+        addFeat("Jack of all Trades");
+    }
+}
+
+class Cleric extends Character{
+    public Cleric (String name, int level) {
+        super(name, level);
+        this.wisdom += 2;
+        this.constitution += 1;
+        addFeat("Channel Divinity");
+        addFeat("Turn Undead");
+    }
+}
+
+class Druid extends Character{
+    public Druid (String name, int level) {
+        super(name, level);
+        this.wisdom += 2;
+        this.constitution += 1;
+        addFeat("Wild Shape");
+        addFeat("Commune with Nature");
+    }
+}
+
+class Fighter extends Character{
+    public Fighter (String name, int level) {
+        super(name, level);
+        this.dexterity += 2;
+        this.constitution += 1;
+        addFeat("Action Surge");
+        addFeat("");
+    }
+}
+
+class Monk extends Character{
+    public Monk (String name, int level) {
+        super(name, level);
+        this.dexterity += 2;
+        this.wisdom += 1;
+        addFeat("Unarmored Movement");
+        addFeat("Stunning Strike");
+    }
+}
+
+class Paladin extends Character{
+    public Paladin (String name, int level) {
+        super(name, level);
+        this.strength += 2;
+        this.charisma += 1;
+        addFeat("Divine Smite");
+        addFeat("Aura of Protection");
+    }
+}
+
+class Ranger extends Character{
+    public Ranger (String name, int level) {
+        super(name, level);
+        this.dexterity += 2;
+        this.wisdom += 1;
+        addFeat("Favored Enemy");
+        addFeat("Surefooted");
+    }
+}
+
+class Rogue extends Character{
+    public Rogue (String name, int level) {
+        super(name, level);
+        this.dexterity += 2;
+        this.intelligence += 1;
+        addFeat("Sneak Attack");
+        addFeat("Uncanny Dodge");
+    }
+}
+
+class Sorcerer extends Character{
+    public Sorcerer (String name, int level) {
+        super(name, level);
+        this.charisma += 2;
+        this.constitution += 1;
+        addFeat("Wild Magic");
+        addFeat("Flexible Spellcasting");
+    }
+}
+
+class Warlock extends Character{
+    public Warlock (String name, int level) {
+        super(name, level);
+        this.charisma += 2;
+        this.constitution += 1;
+        addFeat("Eldritch Patron");
+        addFeat("Pact Magic");
+    }
+}
+
+class Wizard extends Character{
+    public Wizard (String name, int level) {
+        super(name, level);
+        this.intelligence += 2;
+        this.constitution += 1;
+        addFeat("Arcane Recovery");
+        addFeat("Spell Mastery");
+    }
+}
+
+
