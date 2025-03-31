@@ -1,7 +1,9 @@
 import java.util.ArrayList;
 import java.util.Random;
 
+
 public class Main {
+//Prints out the constructors or the character details
     public static void main(String[] args) {
 Character c1 = new Character();
 System.out.println(c1);
@@ -14,6 +16,7 @@ System.out.println(cl1);
     }
 }
 
+//declares the variables for the characters
 class Character {
     protected String name;
     protected int level;
@@ -43,6 +46,7 @@ class Character {
         calculateArmorClass();
     }
 
+    //The dice or stat bonus function that adds stats based on a roll of a dice. Uses a for loop to roll the dice 3 times and gets average.
     private int dice() {
         Random rand = new Random();
         int [] rolls = new int[4];
@@ -76,7 +80,7 @@ class Character {
     private int getAbilityModifier (int score) {
         return (score - 10) / 2;
     }
-
+//Gives the players the HP value starting at 10.
     private void calculateHitPoints() {
         int dmg = getAbilityModifier(constitution);
         if (level == 1) {
@@ -86,16 +90,17 @@ class Character {
             hit_points += (level - 1) * (6 + dmg);
         }
     }
-
+//Gives the players the Defense stat
     private void calculateArmorClass (){
         armor = 10 + getAbilityModifier(dexterity);
     }
-
+//When the character levels up the HP and Hit points increase, this increases the stats as well.
     public void levelUp() {
         level++;
         calculateArmorClass();
         calculateHitPoints();
     }
+    //An arraylist that gives the character features or skills.
 public void addFeat(String feat){
         feats.add(feat);
 }
@@ -104,6 +109,8 @@ public void addFeat(String feat){
     }
 
 }
+
+//Series of subclasses using a taking the superclass of name and level then adding their own gimmick.
 class Barbarian extends Character{
     public Barbarian (String name, int level) {
         super(name, level);
